@@ -22,4 +22,5 @@
         <activity android:name=".ui.home.ItemDetail"/>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

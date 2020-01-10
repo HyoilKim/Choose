@@ -6,25 +6,48 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.choose.R;
 
+import java.util.ArrayList;
+
+import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
+
+import static com.example.choose.R.id.autoViewPager;
+
 public class HomeFragment extends Fragment {
-    Button birthdayButton, moveButton;
-    View root;
+    private Button birthdayButton, moveButton;
+    private View root;
+
+    AutoScrollViewPager autoViewPager;
+    ArrayList<String>data =new ArrayList<>();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         initView();
         setButtonListener();
+
+        ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
+        data.add("https://i.ibb.co/qFmLRYC/m.png");
+        data.add("https://i.ibb.co/ZgXgkgB/w1.png");
+        data.add("https://i.ibb.co/nRX9xN9/w3.png");
+        data.add("https://i.ibb.co/DMvDwTJ/w4.png");
+
+        autoViewPager = (AutoScrollViewPager)root.findViewById(R.id.autoViewPager);
+        AutoScrollAdapter scrollAdapter = new AutoScrollAdapter(getContext(), data);
+        autoViewPager.setAdapter(scrollAdapter); //Auto Viewpager에 Adapter 장착
+        autoViewPager.setInterval(3000); // 페이지 넘어갈 시간 간격 설정
+        autoViewPager.startAutoScroll(); //Auto Scroll 시작
 
         return root;
     }
