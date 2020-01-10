@@ -19,6 +19,7 @@ public class ItemDetail extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((AppCompatActivity)this).getSupportActionBar().hide();
         setContentView(R.layout.activity_item_detail);
 
         imageView = findViewById(R.id.detail_image);
@@ -30,9 +31,8 @@ public class ItemDetail extends AppCompatActivity {
         title.setText(intent.getStringExtra("title"));
         desc.setText(intent.getStringExtra("desc"));
 
+        // ************* 최근 본 상품 DB에 추가 *************** //
+
 
     }
-
-
-
 }

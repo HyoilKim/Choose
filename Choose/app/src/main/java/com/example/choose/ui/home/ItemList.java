@@ -21,7 +21,7 @@ import com.example.choose.R;
 
 import java.util.ArrayList;
 
-public class GiftList extends AppCompatActivity {
+public class ItemList extends AppCompatActivity {
     GridView gridView;
     Adapter adapter;
 

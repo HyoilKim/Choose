@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -17,10 +18,8 @@ import java.util.ArrayList;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
-import static com.example.choose.R.id.autoViewPager;
-
 public class HomeFragment extends Fragment {
-    private Button birthdayButton, moveButton;
+    private ImageButton birthdayButton, moveButton;
     private View root;
 
     AutoScrollViewPager autoViewPager;
@@ -29,6 +28,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,20 +54,20 @@ public class HomeFragment extends Fragment {
 
     public void initView(){
         birthdayButton = root.findViewById(R.id.birthday);
-        moveButton = root.findViewById(R.id.move);
+        moveButton = root.findViewById(R.id.parent);
     }
 
     public void setButtonListener() {
         View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GiftList.class);
+                Intent intent = new Intent(getActivity(), ItemList.class);
                 switch (v.getId()) {
                     case R.id.birthday:
                         intent.putExtra("name","birthday");
                         break;
-                    case R.id.move:
-                        intent.putExtra("name","move");
+                    case R.id.parent:
+                        intent.putExtra("name","parent");
                         break;
                     default:
                         break;

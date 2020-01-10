@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.GiftList"/>
+        <activity android:name=".ui.home.ItemList"/>
         <activity android:name=".ui.home.ItemDetail"/>
     </application>
 

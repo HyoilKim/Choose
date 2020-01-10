@@ -8,7 +8,7 @@
     <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
         android:id="@+id/autoViewPager"
         android:layout_width="match_parent"
-        android:layout_height="190dp"></cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
+        android:layout_height="160dp"></cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,13 +18,18 @@
         android:layout_marginRight="20dp">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <Button
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp">
+            <ImageButton
                 android:id="@+id/birthday"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="생일" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="생일"
+                android:src="@drawable/ic_birthday_cake"
+                android:scaleType="centerInside"
+                android:background="@null"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,30 +41,38 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/move"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="집들이" />
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+
+            <ImageButton
+                android:id="@+id/parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="효도"
+                android:src="@drawable/ic_parents"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="집들이"
+                android:text="효도"
                 android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="출산/돌" />
-
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="출산/돌"
+                android:src="@drawable/ic_baby"
+                android:scaleType="centerInside"
+                android:background="@null"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,10 +85,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="명절" />
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="명절"
+                android:src="@drawable/ic_happy_new_year"
+                android:scaleType="centerInside"
+                android:background="@null"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,56 +105,111 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginLeft="45dp">
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="입사" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_employee"
+                android:text="입사"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="취업"
+                android:textSize="15dp" />
+        </LinearLayout>
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="퇴직" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_rocking_chair"
+                android:text="퇴직" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="퇴직"
+                android:gravity="center"/>
+        </LinearLayout>
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="졸업" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_soldier"
+                android:scaleType="centerInside"
+                android:background="@null"
+                android:text="입대" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="입대"
+                android:gravity="center"/>
+        </LinearLayout>
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="입대" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp">
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_soldier1"
+                android:scaleType="centerInside"
+                android:background="@null"
+                android:text="전역" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="전역"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginLeft="30dp">
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="연인기념" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="연인" />
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="결혼기념" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="결혼" />
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="졸업" />
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="집들이" />
     </LinearLayout>
 
 </LinearLayout>
