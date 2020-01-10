@@ -16,6 +16,12 @@ import com.example.choose.R;
 
 public class RecentLookup extends Fragment {
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recent, container, false);
         return root;

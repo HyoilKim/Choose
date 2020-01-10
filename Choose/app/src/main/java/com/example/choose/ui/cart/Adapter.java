@@ -72,5 +72,4 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             spinner = (Spinner) itemView.findViewById(R.id.cart_spinner);
         }
     }
-
 }
