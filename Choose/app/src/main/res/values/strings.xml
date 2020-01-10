@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">츄즈</string>
+    <string name="title_home">홈</string>
+    <string name="title_dashboard">최근 본</string>
+    <string name="title_notifications">장바구니</string>
+    <string name="title_myPage">마이 페이지</string>
+</resources>
