@@ -1,36 +1,46 @@
 package com.example.choose.ui.cart;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.choose.MainActivity;
 import com.example.choose.R;
+import com.example.choose.RetrofitAPI;
+import com.example.choose.UserInfo;
+import com.example.choose.ui.home.ItemData;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Cart extends Fragment {
     private ArrayList<CartItemData> itemList;
     private RecyclerView recyclerView;
     private Adapter adapter;
     public static TextView sumOfPrice;
+
+    private Retrofit mRetrofit;
+    private RetrofitAPI mRetrofitAPI;
+
+    private ArrayList<Integer> eachItemCount;
+    private ArrayList<Integer> eachItemPrice;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,22 +52,67 @@ public class Cart extends Fragment {
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
         sumOfPrice = root.findViewById(R.id.priceSum);
 
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://192.249.19.252:2680")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI.class);
+
         recyclerView = root.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         itemList = new ArrayList<>();
-        // ************* DB : 장바구니 정보 받아오기 **************//
-        ArrayList<Integer> eachItemCount = new ArrayList<>(); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1);
-        ArrayList<Integer> eachItemPrice = new ArrayList<>(); eachItemPrice.add(1000); eachItemPrice.add(2000); eachItemPrice.add(3000); eachItemPrice.add(4000);
+        eachItemCount = new ArrayList<>();
+        eachItemPrice = new ArrayList<>();
 
-        itemList.add(new CartItemData("1.5L 페트병 물", "1,000", "0", 1, false));
-        itemList.add(new CartItemData("3.5L 페트병 물", "2,000", "0", 1, false));
-        itemList.add(new CartItemData("4.5L 페트병 물", "3,000", "0", 1, false));
-        itemList.add(new CartItemData("6L 페트병 물", "4,000", "0", 1, false));
+        mRetrofitAPI.getUserCart(UserInfo.getEmail()).enqueue(new Callback<ArrayList<UserCart>>() {
+            @SuppressLint("StaticFieldLeak")
+            @Override
+            public void onResponse(Call<ArrayList<UserCart>> call, Response<ArrayList<UserCart>> response) {
+                ArrayList<UserCart> cart = response.body();
 
-        adapter = new Adapter(getContext(), itemList, eachItemCount, eachItemPrice);
-        recyclerView.setAdapter(adapter);
+                if (cart.size() != 0) {
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            try {
+                                for (UserCart item : cart) {
+                                    Log.d("Print", "id : " + item.getId() + ", userId : " + item.getUserId() + ", item : " + item.getItemId() +
+                                            ", count : " + item.getCount());
+
+                                    Call<ItemData> getOneItem = mRetrofitAPI.getOneItem(item.getItemId());
+
+                                    ItemData i = getOneItem.execute().body();
+
+                                    Log.d("Print", "id : " + i.getId() + ", userId : " + i.getName() + ", item : " + i.getPrice());
+
+                                    itemList.add(new CartItemData(i.getName(), String.valueOf(i.getPrice()), i.getImage(), item.getCount(), false));
+                                    eachItemPrice.add(i.getPrice());
+                                    eachItemCount.add(item.getCount());
+                                }
+                            } catch (IOException e) {
+
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            adapter = new Adapter(getContext(), itemList, eachItemCount, eachItemPrice);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }.execute();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<UserCart>> call, Throwable t) {
+                Log.d("Print", "-------------------Failure------------------");
+            }
+        });
 
 
         // ************* Bottom navigator bar set visible(hardware back key) **************** //

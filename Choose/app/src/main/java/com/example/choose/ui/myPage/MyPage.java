@@ -49,6 +49,10 @@ public class MyPage extends Fragment {
 
         mRetrofitAPI = mRetrofit.create(RetrofitAPI.class);
 
+        if (UserInfo.isIsLogin()) {
+            login2.setText(UserInfo.getEmail() + " 님 안녕하세요.");
+        }
+
         login2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +88,8 @@ public class MyPage extends Fragment {
 
         return view;
     }
+
+
 
     public void login(String email, String password) {
         mRetrofitAPI.getUserData(email).enqueue(new Callback<UserData>() {

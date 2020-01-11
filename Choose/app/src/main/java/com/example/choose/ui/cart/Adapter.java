@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.choose.R;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.eachItemCount = eachItemCount;
         this.eachItemPrice = eachItemPrice;
         arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, spinnerItems);
-        setSumOfPrice();
+//        setSumOfPrice();
     }
 
     @NonNull
@@ -62,6 +63,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.title.setText(title);
         holder.price.setText(price);
         holder.spinner.setAdapter(arrayAdapter);
+        holder.spinner.setSelection(count - 1);
+        Glide.with(context).load("http://192.249.19.252:2680" + item.getImage()).into(holder.image);
     }
 
     @Override

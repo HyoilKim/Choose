@@ -2,7 +2,7 @@ package com.example.choose;
 
 public class UserInfo {
     private static int id;
-    private static String email;
+    private static String email = "ag502@naver.com";
     private static String password;
     private static boolean isLogin = false;
 
