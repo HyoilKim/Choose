@@ -1,5 +1,6 @@
 package com.example.choose.ui.myPage;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyPage extends Fragment {
-    private ImageButton login1;
+    private ImageButton likeItem;
     private TextView login2;
 
     private Retrofit mRetrofit;
@@ -80,12 +81,25 @@ public class MyPage extends Fragment {
                     public void onClick(View v) {
                         // ************* DB정보와 일치 유무 ***************//
                         Log.d("try", "sign in");
+<<<<<<< HEAD
                         login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
+=======
+                        login2.setText("OOO님 안녕하세요.");
+
+>>>>>>> acf84cb3311cdae415ebda7bb268af3bd5f8f3c1
                     }
                 });
             }
         });
 
+        likeItem = view.findViewById(R.id.likeItem);
+        likeItem.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WishList.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

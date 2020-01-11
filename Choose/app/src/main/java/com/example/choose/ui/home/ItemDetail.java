@@ -48,7 +48,7 @@ public class ItemDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("@","~~");
-                // *********** 장바구니 DB에 추가 ************ //
+                // *********** 좋아요 DB에 추가 ************ //
             }
         });
         addCart.setOnClickListener(new ImageButton.OnClickListener() {
