@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class HomeFragment extends Fragment {
     private ImageButton birthdayButton, moveButton;
+    private ImageView searchIcon;
     private View root;
 
     AutoScrollViewPager autoViewPager;
@@ -55,6 +57,8 @@ public class HomeFragment extends Fragment {
     public void initView(){
         birthdayButton = root.findViewById(R.id.birthday);
         moveButton = root.findViewById(R.id.parent);
+        searchIcon = root.findViewById(R.id.searchIcon);
+        searchIcon.bringToFront();
     }
 
     public void setButtonListener() {
