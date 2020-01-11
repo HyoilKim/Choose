@@ -18,12 +18,22 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choose.R;
+import com.example.choose.RetrofitAPI;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemList extends AppCompatActivity {
     GridView gridView;
     Adapter adapter;
+
+    private Retrofit mRetrofit;
+    private RetrofitAPI mRetrofitAPI;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,14 +43,37 @@ public class ItemList extends AppCompatActivity {
         setContentView(R.layout.activity_giftlist);
         gridView = (GridView) findViewById(R.id.giftList);
 
-        adapter = new Adapter();
-        // *************** DB 정보로 판매 상품들 정보 세팅 ******************** //
-        adapter.addItem(new ItemData("A", "123", R.drawable.gift1+""));
-        adapter.addItem(new ItemData("B", "456", R.drawable.gift1+""));
-        adapter.addItem(new ItemData("C", "789", R.drawable.gift1+""));
-        adapter.addItem(new ItemData("D", "000", R.drawable.gift1+""));
-        gridView.setAdapter(adapter);
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("http://192.249.19.252:2680")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI.class);
 
+        Intent intent = getIntent();
+        String category = intent.getStringExtra("name");
+
+        adapter = new Adapter();
+
+        mRetrofitAPI.getCategoryItem(category).enqueue(new Callback<ArrayList<ItemData>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
+                ArrayList<ItemData> items = response.body();
+
+                if (items.size() != 0) {
+                    for (ItemData elem : items) {
+                        adapter.addItem(elem);
+                        Log.d("Print", "id: " + elem.getId() + " name: " + elem.getName() + " category: " + elem.getCategory() +
+                                " price: " + elem.getPrice() + " image: " + elem.getImage() + " description : " + elem.getDescription());
+                    }
+                    gridView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ItemData>> call, Throwable t) {
+
+            }
+        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -49,18 +82,15 @@ public class ItemList extends AppCompatActivity {
                 Log.d("img", adapter.getItem(i).getImage());
                 intent.putExtra("image", adapter.getItem(i).getImage()+"");
                 intent.putExtra("title", adapter.getItem(i).getName());
-                intent.putExtra("desc", adapter.getItem(i).getDesc());
+                intent.putExtra("desc", adapter.getItem(i).getDescription());
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"이름 : "
-                        + adapter.getItem(i).getName().toString()
-                        + " , Tel : "+adapter.getItem(i).getDesc().toString(),Toast.LENGTH_LONG).show();
             }
         });
     }
 
 
     class Adapter extends BaseAdapter {
-        ArrayList<ItemData> items = new ArrayList<ItemData>();
+        ArrayList<ItemData> items = new ArrayList<>();
 
         @Override
         public int getCount() { return items.size(); }

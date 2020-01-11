@@ -64,10 +64,10 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ItemList.class);
                 switch (v.getId()) {
                     case R.id.birthday:
-                        intent.putExtra("name","birthday");
+                        intent.putExtra("name","생일");
                         break;
                     case R.id.parent:
-                        intent.putExtra("name","parent");
+                        intent.putExtra("name","효도");
                         break;
                     default:
                         break;

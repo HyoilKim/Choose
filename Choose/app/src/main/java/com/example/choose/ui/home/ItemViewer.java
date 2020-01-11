@@ -27,7 +27,8 @@ public class ItemViewer extends LinearLayout {
 
     public void setItem(ItemData item) {
         title.setText(item.getName());
-        desc.setText(item.getDesc());
-        imageView.setImageResource(Integer.parseInt(item.getImage()));
+        desc.setText(item.getDescription());
+//        imageView.setImageResource(Integer.parseInt(item.getImage()));
+        imageView.setImageResource(R.drawable.gift1);
     }
 }
