@@ -123,7 +123,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(context, spinnerItems[position]+" 선택됨.", Toast.LENGTH_SHORT).show();
                     int itemPos = getAdapterPosition();
                     int count = Integer.parseInt(spinnerItems[position]);
                     if (checkBox.isChecked()) {

@@ -24,7 +24,6 @@
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/navigation_myPage"
-        android:name="com.example.choose.ui.cart.Cart"
-        android:label="@string/title_myPage"
-        tools:layout="@layout/fragment_cart" />
+        android:name="com.example.choose.ui.myPage.MyPage"
+        android:label="@string/title_myPage" />
 </navigation>

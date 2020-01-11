@@ -47,7 +47,7 @@ public class Cart extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         itemList = new ArrayList<>();
-        // ************* DB Item 정보 **************//
+        // ************* DB : 장바구니 정보 받아오기 **************//
         ArrayList<Integer> eachItemCount = new ArrayList<>(); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1);
         ArrayList<Integer> eachItemPrice = new ArrayList<>(); eachItemPrice.add(1000); eachItemPrice.add(2000); eachItemPrice.add(3000); eachItemPrice.add(4000);
 
