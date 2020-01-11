@@ -1,5 +1,6 @@
 package com.example.choose.ui.myPage;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.example.choose.R;
 
 public class MyPage extends Fragment {
-    private ImageButton login1;
+    private ImageButton likeItem;
     private TextView login2;
 
     @Override
@@ -58,11 +59,20 @@ public class MyPage extends Fragment {
                         // ************* DB정보와 일치 유무 ***************//
                         Log.d("try", "sign in");
                         login2.setText("OOO님 안녕하세요.");
+
                     }
                 });
             }
         });
 
+        likeItem = view.findViewById(R.id.likeItem);
+        likeItem.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WishList.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

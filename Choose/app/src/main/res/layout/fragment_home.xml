@@ -29,7 +29,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:text="생일"
-                android:src="@drawable/ic_birthday_cake"
+                android:src="@drawable/ic_birthda"
                 android:scaleType="centerInside"
                 android:background="@null"/>
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_height="60dp"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_rocking_chair"
+                android:src="@drawable/ic_chair"
                 android:text="퇴직" />
             <TextView
                 android:layout_width="match_parent"
@@ -198,10 +198,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <ImageButton
                 android:layout_width="60dp"
-                android:layout_height="60dp" />
+                android:layout_height="60dp"
+                android:src="@drawable/ic_relationship"
+                android:scaleType="centerInside"
+                android:background="@null"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,11 +217,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_wedding_couple"
+                android:src="@drawable/ic_wife"
                 android:scaleType="centerInside"
                 android:background="@null"/>
             <TextView
@@ -230,11 +235,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:text="집들이" />
+                android:src="@drawable/ic_move"
+                android:background="@null"
+                android:scaleType="centerInside"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -245,7 +253,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
