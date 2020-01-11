@@ -29,9 +29,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
-        Log.d("oncreate","asd");
-
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

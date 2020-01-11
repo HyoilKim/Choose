@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class Cart extends Fragment {
     private ArrayList<CartItemData> itemList;
     private RecyclerView recyclerView;
     private Adapter adapter;
+    public static TextView sumOfPrice;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,20 +40,25 @@ public class Cart extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
+        sumOfPrice = root.findViewById(R.id.priceSum);
 
         recyclerView = root.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         itemList = new ArrayList<>();
+        // ************* DB Item 정보 **************//
+        ArrayList<Integer> eachItemCount = new ArrayList<>(); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1); eachItemCount.add(1);
+        ArrayList<Integer> eachItemPrice = new ArrayList<>(); eachItemPrice.add(1000); eachItemPrice.add(2000); eachItemPrice.add(3000); eachItemPrice.add(4000);
+
         itemList.add(new CartItemData("1.5L 페트병 물", "1,000", "0", 1, false));
         itemList.add(new CartItemData("3.5L 페트병 물", "2,000", "0", 1, false));
         itemList.add(new CartItemData("4.5L 페트병 물", "3,000", "0", 1, false));
         itemList.add(new CartItemData("6L 페트병 물", "4,000", "0", 1, false));
-        itemList.add(new CartItemData("9L 페트병 물", "5,000", "0", 1, false));
 
-        adapter = new Adapter(getContext(), itemList);
+        adapter = new Adapter(getContext(), itemList, eachItemCount, eachItemPrice);
         recyclerView.setAdapter(adapter);
+
 
         // ************* Bottom navigator bar set visible(hardware back key) **************** //
         root.setFocusableInTouchMode(true);

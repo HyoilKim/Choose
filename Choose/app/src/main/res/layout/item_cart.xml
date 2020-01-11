@@ -18,7 +18,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:checked="true"/>
 
             <TextView
                 android:id="@+id/cart_title"
@@ -77,12 +78,15 @@
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:text="delete" />
+
                 <Spinner
                     android:id="@+id/cart_spinner"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="50dp"
-                    android:layout_height="38dp"
-                    android:layout_toRightOf="@id/cart_deleteButton" />
+                    android:layout_height="37dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/cart_deleteButton"
+                    android:background="@drawable/spinner_background" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

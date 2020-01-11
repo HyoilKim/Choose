@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="match_parent"
@@ -13,14 +14,15 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"/>
+            android:layout_marginBottom="50dp"/>
     </LinearLayout>
-    <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/bottomMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/linear1">
+        android:layout_alignParentBottom="true">
         <TextView
             android:id="@+id/sum"
             android:layout_width="42dp"
@@ -28,7 +30,7 @@
             android:gravity="center"
             android:text="합계" />
         <TextView
-            android:id="@+id/sum1"
+            android:id="@+id/priceSum"
             android:layout_width="101dp"
             android:layout_height="50dp"
             android:layout_toRightOf="@+id/sum"
@@ -36,9 +38,9 @@
             android:text="원" />
         <Button
             android:id="@+id/buy"
-            android:layout_width="271dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/sum1"
+            android:layout_toRightOf="@+id/priceSum"
             android:text="구매하기" />
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
