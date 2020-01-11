@@ -81,12 +81,8 @@ public class MyPage extends Fragment {
                     public void onClick(View v) {
                         // ************* DB정보와 일치 유무 ***************//
                         Log.d("try", "sign in");
-<<<<<<< HEAD
                         login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
-=======
-                        login2.setText("OOO님 안녕하세요.");
 
->>>>>>> acf84cb3311cdae415ebda7bb268af3bd5f8f3c1
                     }
                 });
             }
