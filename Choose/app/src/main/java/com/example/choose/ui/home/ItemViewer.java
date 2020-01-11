@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.choose.R;
 
 public class ItemViewer extends LinearLayout {
@@ -27,7 +28,9 @@ public class ItemViewer extends LinearLayout {
 
     public void setItem(ItemData item) {
         title.setText(item.getName());
-        desc.setText(item.getDesc());
-        imageView.setImageResource(Integer.parseInt(item.getImage()));
+        desc.setText(item.getDescription());
+//        imageView.setImageResource(Integer.parseInt(item.getImage()));
+        Glide.with(this).load("http://192.249.19.252:2680" + item.getImage()).into(imageView);
+//        imageView.setImageResource(R.drawable.gift1);
     }
 }
