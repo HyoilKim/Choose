@@ -44,4 +44,7 @@ public interface RetrofitAPI {
 
     @PUT("/add-like/{email}/{id}")
     Call<ResponseBody> addItemToLike(@Path("email") String email, @Path("id") Integer id);
+
+    @GET("/get-recent/{email}")
+    Call<ArrayList<UserWish>> getRecentShow(@Path("email") String email);
 }
