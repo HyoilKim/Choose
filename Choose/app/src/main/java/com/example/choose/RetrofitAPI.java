@@ -41,4 +41,7 @@ public interface RetrofitAPI {
 
     @DELETE("/add-like/{email}/{id}")
     Call<ResponseBody> deleteItemToLike(@Path("email") String email, @Path("id") Integer id);
+
+    @PUT("/add-like/{email}/{id}")
+    Call<ResponseBody> addItemToLike(@Path("email") String email, @Path("id") Integer id);
 }

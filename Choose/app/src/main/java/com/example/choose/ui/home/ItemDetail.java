@@ -64,6 +64,11 @@ public class ItemDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("@","~~");
                 // *********** 좋아요 DB에 추가 ************ //
+                if (UserInfo.isIsLogin()) {
+                    addUserLike(UserInfo.getEmail(), itemId);
+                } else {
+                    Toast.makeText(getApplicationContext(), "로그인이 필요한 서비스 입니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         addCart.setOnClickListener(new ImageButton.OnClickListener() {
@@ -97,7 +102,22 @@ public class ItemDetail extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("PRINT", "--------------Adding to Cart Fail!!--------------------");
+                Log.d("PRINT", "-------------------Adding to Cart Fail!!--------------------");
+            }
+        });
+    }
+
+    private void addUserLike(String email, int itemId) {
+        RetrofitStatic.getmRetrofitAPI().addItemToLike(email, itemId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("PRINT", "-------------------Adding to Like Success!!------------------");
+                Toast.makeText(getApplicationContext(), "찜한 목록에 추가 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("PRINT", "-------------------Adding to Like Fail!!--------------------");
             }
         });
     }
