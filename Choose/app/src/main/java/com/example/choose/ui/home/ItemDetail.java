@@ -13,41 +13,71 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.choose.R;
 import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
+import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static androidx.annotation.Dimension.DP;
+
 public class ItemDetail extends AppCompatActivity {
+    private ArrayList<Integer> imageList;
     private ImageView imageView;
     private TextView title, desc;
     private ImageButton like, addCart;
     private Button buy;
     private Intent intent;
+    private ViewPager viewPager;
 
     private int itemId;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ((AppCompatActivity)this).getSupportActionBar().hide();
-        setContentView(R.layout.activity_item_detail);
-
+    public void initView() {
         imageView = findViewById(R.id.detail_image);
         title = findViewById(R.id.detail_title);
         desc = findViewById(R.id.detail_desc);
         like = findViewById(R.id.like);
         addCart = findViewById(R.id.cart);
         buy = findViewById(R.id.buy);
+        viewPager = findViewById(R.id.viewPager);
+    }
+
+    public void initImageData() {
+        // ************ DB 에서 상품 이미지 *************** //
+        imageList = new ArrayList<>();
+        imageList.add(R.drawable.user);
+        imageList.add(R.drawable.recent);
+        imageList.add(R.drawable.cart);
+    }
+
+    public void setViewPager() {
+        viewPager.setClipToPadding(false);
+        float density = getResources().getDisplayMetrics().density;
+        int margin = (int) (DP * density);
+        viewPager.setPadding(margin, 0, margin, 0);
+        viewPager.setPageMargin(margin/2);
+        viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_item_detail);
+        ((AppCompatActivity)this).getSupportActionBar().hide();
+
+        initView();
+        initImageData();
+        setViewPager();
 
         intent = getIntent();
-//        imageView.setImageResource(Integer.parseInt(intent.getStringExtra("image")));
         itemId = intent.getIntExtra("ItemId", -1);
         Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
         title.setText(intent.getStringExtra("title"));
