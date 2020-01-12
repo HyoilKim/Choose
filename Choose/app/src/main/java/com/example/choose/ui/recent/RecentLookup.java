@@ -2,6 +2,7 @@ package com.example.choose.ui.recent;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.example.choose.R;
 import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 import com.example.choose.ui.home.ItemData;
+import com.example.choose.ui.home.ItemDetail;
 import com.example.choose.ui.myPage.UserWish;
 
 import java.util.ArrayList;
@@ -89,7 +91,15 @@ public class RecentLookup extends Fragment {
                             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Log.d("asdf", position+"");
+                                    Log.d("asdf", recentShow.get(position).getId() + " ");
+                                    
+                                    Intent intent = new Intent(getContext(), ItemDetail.class);
+                                    Log.d("img", recentShow.get(position).getImage());
+                                    intent.putExtra("ItemId", recentShow.get(position).getId());
+                                    intent.putExtra("image", recentShow.get(position).getImage());
+                                    intent.putExtra("title", recentShow.get(position).getName());
+                                    intent.putExtra("desc", recentShow.get(position).getDescription());
+                                    startActivity(intent);
                                 }
                             });
                         }

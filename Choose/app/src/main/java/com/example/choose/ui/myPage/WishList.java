@@ -42,12 +42,6 @@ public class WishList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         wishList = new ArrayList<>();
-//        wishList.add(new WishListItem("", "생수1.5L", "1,500"));
-//        wishList.add(new WishListItem("", "생수3.5L", "2,500"));
-//        wishList.add(new WishListItem("", "생수5.5L", "3,500"));
-//
-//        adapter = new Adapter(wishList);
-//        recyclerView.setAdapter(adapter);
 
         RetrofitStatic.getmRetrofitAPI().getUserWish(UserInfo.getEmail()).enqueue(new Callback<ArrayList<UserWish>>() {
             @SuppressLint("StaticFieldLeak")

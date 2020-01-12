@@ -47,4 +47,7 @@ public interface RetrofitAPI {
 
     @GET("/get-recent/{email}")
     Call<ArrayList<UserWish>> getRecentShow(@Path("email") String email);
+
+    @PUT("/get-recent/{email}/{id}")
+    Call<ResponseBody> addRecentView(@Path("email") String email, @Path("id") Integer id);
 }
