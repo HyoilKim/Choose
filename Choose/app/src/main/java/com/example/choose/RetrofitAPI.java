@@ -6,8 +6,10 @@ import com.example.choose.ui.myPage.UserData;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface RetrofitAPI {
@@ -22,4 +24,7 @@ public interface RetrofitAPI {
 
     @GET("/get-item/item/{id}")
     Call<ItemData> getOneItem(@Path("id") Integer id);
+
+    @PUT("/get-cart/{email}/{id}/{number}")
+    Call<ResponseBody> updateItemCount(@Path("email") String email, @Path("id") Integer id, @Path("number") Integer count);
 }
