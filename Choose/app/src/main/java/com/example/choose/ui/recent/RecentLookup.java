@@ -42,7 +42,6 @@ public class RecentLookup extends Fragment {
             }
         });
 
-
         return root;
     }
 }

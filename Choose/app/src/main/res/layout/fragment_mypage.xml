@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#e9e9e9"
-        android:paddingTop="5dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,6 +94,7 @@
                 android:gravity="left"/>
         </LinearLayout>
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -101,22 +103,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#E9E9e9">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
-                android:layout_marginTop="5dp">
+                android:orientation="horizontal"
+                android:background="#ffffff">
+
                 <ImageView
                     android:layout_width="51dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_loupe"
-                    android:scaleType="centerInside"
+                    android:background="@null"
                     android:paddingLeft="10dp"
-                    android:background="#ffffff" />
+                    android:paddingRight="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_loupe" />
+
                 <Button
                     android:id="@+id/button"
                     android:layout_width="match_parent"
@@ -128,71 +133,83 @@
                     android:text="배송조회" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="1dp">
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="51dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_loupe"
-                    android:scaleType="centerInside"
+                    android:background="#ffffff"
                     android:paddingLeft="10dp"
-                    android:background="#ffffff" />
+                    android:paddingRight="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_loupe" />
+
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="작성후기"
+                    android:background="#ffffff"
                     android:gravity="left"
-                    android:paddingTop="15dp"
                     android:paddingLeft="5dp"
-                    android:background="#ffffff" />
+                    android:paddingTop="15dp"
+                    android:text="작성후기" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="1dp">
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="51dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_loupe"
-                    android:scaleType="centerInside"
+                    android:background="#ffffff"
                     android:paddingLeft="10dp"
-                    android:background="#ffffff" />
+                    android:paddingRight="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_loupe" />
+
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="할인 쿠폰"
+                    android:background="#ffffff"
                     android:gravity="left"
-                    android:paddingTop="15dp"
                     android:paddingLeft="5dp"
-                    android:background="#ffffff"/>
+                    android:paddingTop="15dp"
+                    android:text="할인 쿠폰" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="51dp"
                     android:layout_height="match_parent"
+                    android:background="#ffffff"
                     android:paddingLeft="10dp"
-                    android:src="@drawable/ic_loupe"
+                    android:paddingRight="10dp"
                     android:scaleType="centerInside"
-                    android:background="#ffffff" />
+                    android:src="@drawable/ic_loupe" />
+
                 <Button
                     android:id="@+id/button6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="설정"
+                    android:background="#ffffff"
                     android:gravity="left"
-                    android:paddingTop="15dp"
                     android:paddingLeft="5dp"
-                    android:background="#ffffff"/>
+                    android:paddingTop="15dp"
+                    android:text="설정" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

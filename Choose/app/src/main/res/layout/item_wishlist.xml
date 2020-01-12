@@ -2,21 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@color/homeBackground">
     <RelativeLayout
         android:id="@+id/layout2"
-        android:layout_width="310dp"
+        android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ffffff">
 
         <ImageView
             android:id="@+id/wish_image"
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:src="@drawable/gift"
-            android:layout_marginRight="10dp"/>
+            android:scaleType="centerCrop"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/wish_title"

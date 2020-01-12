@@ -18,12 +18,12 @@
                 android:layout_height="224dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/gift" />
-            <EditText
+            <TextView
                 android:id="@+id/detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_image"/>
-            <EditText
+            <TextView
                 android:id="@+id/detail_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
