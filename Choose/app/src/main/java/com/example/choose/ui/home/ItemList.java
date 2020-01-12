@@ -80,7 +80,8 @@ public class ItemList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), ItemDetail.class);
                 Log.d("img", adapter.getItem(i).getImage());
-                intent.putExtra("image", adapter.getItem(i).getImage()+"");
+                intent.putExtra("ItemId", adapter.getItem(i).getId());
+                intent.putExtra("image", adapter.getItem(i).getImage());
                 intent.putExtra("title", adapter.getItem(i).getName());
                 intent.putExtra("desc", adapter.getItem(i).getDescription());
                 startActivity(intent);
