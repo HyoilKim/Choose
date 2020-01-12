@@ -16,17 +16,14 @@ public class CartItemData {
     }
 
     public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
     public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
-
     public String getPrice() { return price; }
-    public void setPrice(String price) { this.price = price; }
-
-    public int getCount() { return count; }
-    public void setCount(int count) { this.count = count; }
-
     public boolean isCheck() { return isCheck; }
+    public int getCount() { return count; }
+
+    public void setTitle(String title) { this.title = title; }
+    public void setImage(String image) { this.image = image; }
+    public void setPrice(String price) { this.price = price; }
+    public void setCount(int count) { this.count = count; }
     public void setCheck(boolean check) { isCheck = check; }
 }

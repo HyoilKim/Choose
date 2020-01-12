@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 public class HomeFragment extends Fragment {
     private ImageButton birthdayButton, moveButton;
     private ImageView searchIcon;
+    private TextView searchMenuBar;
     private View root;
 
     AutoScrollViewPager autoViewPager;
@@ -51,6 +53,14 @@ public class HomeFragment extends Fragment {
         autoViewPager.setInterval(3000); // 페이지 넘어갈 시간 간격 설정
         autoViewPager.startAutoScroll(); //Auto Scroll 시작
 
+        searchMenuBar = root.findViewById(R.id.searchBar);
+        searchMenuBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchList.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 

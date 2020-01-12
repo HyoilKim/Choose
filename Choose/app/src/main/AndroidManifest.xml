@@ -23,6 +23,7 @@
         <activity android:name=".ui.home.ItemList"/>
         <activity android:name=".ui.home.ItemDetail"/>
         <activity android:name=".ui.myPage.WishList"/>
+        <activity android:name=".ui.home.SearchList"/>
     </application>
 
 </manifest>

@@ -33,7 +33,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyPage extends Fragment {
     private ImageButton likeItem;
     private TextView login2;
-
     private Retrofit mRetrofit;
     private RetrofitAPI mRetrofitAPI;
 
@@ -82,7 +81,7 @@ public class MyPage extends Fragment {
                         // ************* DB정보와 일치 유무 ***************//
                         Log.d("try", "sign in");
                         login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
-
+                        popupWindow.dismiss();
                     }
                 });
             }
@@ -96,6 +95,7 @@ public class MyPage extends Fragment {
                 startActivity(intent);
             }
         });
+
         return view;
     }
 
