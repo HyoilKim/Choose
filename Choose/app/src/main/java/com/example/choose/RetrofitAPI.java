@@ -3,6 +3,7 @@ package com.example.choose;
 import com.example.choose.ui.home.ItemData;
 import com.example.choose.ui.cart.UserCart;
 import com.example.choose.ui.myPage.UserData;
+import com.example.choose.ui.myPage.UserWish;
 
 import java.util.ArrayList;
 
@@ -34,4 +35,10 @@ public interface RetrofitAPI {
 
     @DELETE("/add-cart/{email}/{id}")
     Call<ResponseBody> deleteItemToCart(@Path("email") String email, @Path("id") Integer id);
+
+    @GET("/get-like/{email}")
+    Call<ArrayList<UserWish>> getUserWish(@Path("email") String email);
+
+    @DELETE("/add-like/{email}/{id}")
+    Call<ResponseBody> deleteItemToLike(@Path("email") String email, @Path("id") Integer id);
 }
