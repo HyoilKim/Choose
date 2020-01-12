@@ -19,9 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choose.R;
 import com.example.choose.RetrofitAPI;
+import com.example.choose.RetrofitStatic;
+import com.example.choose.UserInfo;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,6 +81,20 @@ public class ItemList extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (UserInfo.isIsLogin()) {
+                    RetrofitStatic.getmRetrofitAPI().addRecentView(UserInfo.getEmail(), adapter.getItem(i).getId()).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.d("PRINT", "---------------------Add Recent View Success------------------------");
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("PRINT", "---------------------Add Recent View Fail---------------------------");
+                        }
+                    });
+                }
+
                 Intent intent = new Intent(getApplicationContext(), ItemDetail.class);
                 Log.d("img", adapter.getItem(i).getImage());
                 intent.putExtra("ItemId", adapter.getItem(i).getId());
