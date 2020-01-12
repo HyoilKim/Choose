@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.choose.R;
 import com.example.choose.RetrofitAPI;
+import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private ArrayList<Integer> eachItemCount, eachItemPrice;
     String[] spinnerItems = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
-    private Retrofit mRetrofit;
-    private RetrofitAPI mRetrofitAPI;
+//    private Retrofit mRetrofit;
+//    private RetrofitAPI mRetrofitAPI;
 
     public Adapter(Context context, ArrayList<CartItemData> itemList, ArrayList<Integer> eachItemCount, ArrayList<Integer> eachItemPrice) {
         this.itemList = itemList;
@@ -57,12 +58,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_cart, parent, false);
 
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://192.249.19.252:2680")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        mRetrofitAPI = mRetrofit.create(RetrofitAPI.class);
+//        mRetrofit = new Retrofit.Builder()
+//                .baseUrl("http://192.249.19.252:2680")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        mRetrofitAPI = mRetrofit.create(RetrofitAPI.class);
 
         return new ViewHolder(view);
     }
@@ -90,7 +91,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     private void updateNumber(String email, int itemId, int number) {
-        mRetrofitAPI.updateItemCount(email, itemId, number).enqueue(new Callback<ResponseBody>() {
+        RetrofitStatic.getmRetrofitAPI().updateItemCount(email, itemId, number).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("PRINT", "------------------Success-----------------");
@@ -99,6 +100,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("PRINT", "------------------Failure-----------------");
+            }
+        });
+    }
+
+    private void deleteItem(String email, int itemId) {
+        RetrofitStatic.getmRetrofitAPI().deleteItemToCart(email, itemId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("PRINT", "------------------Delete Success-----------------");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("PRINT", "------------------Delete Failure-----------------");
             }
         });
     }
@@ -123,6 +138,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
+                        deleteItem(UserInfo.getEmail(), itemList.get(getAdapterPosition()).getItemId());
                         itemList.remove(pos);
                         notifyItemRemoved(pos);
                         eachItemCount.remove(pos);

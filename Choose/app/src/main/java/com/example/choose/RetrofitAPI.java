@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -27,4 +28,10 @@ public interface RetrofitAPI {
 
     @PUT("/get-cart/{email}/{id}/{number}")
     Call<ResponseBody> updateItemCount(@Path("email") String email, @Path("id") Integer id, @Path("number") Integer count);
+
+    @PUT("/add-cart/{email}/{id}")
+    Call<ResponseBody> addItemToCart(@Path("email") String email, @Path("id") Integer id);
+
+    @DELETE("/add-cart/{email}/{id}")
+    Call<ResponseBody> deleteItemToCart(@Path("email") String email, @Path("id") Integer id);
 }
