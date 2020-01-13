@@ -1,6 +1,7 @@
 package com.example.choose;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,12 +12,21 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.choose.ui.cart.UserCart;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
+    public static TextView badge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
         View badgeLayout = LayoutInflater.from(this)
                 .inflate(R.layout.bottom_nav_badge, itemView, true);
-        TextView badge = badgeLayout.findViewById(R.id.badge);
-        badge.setText("0+");
+        badge = badgeLayout.findViewById(R.id.badge);
+        if (UserInfo.isIsLogin()) {
+            RetrofitStatic.getmRetrofitAPI().getUserCart(UserInfo.getEmail()).enqueue(new Callback<ArrayList<UserCart>>() {
+                @Override
+                public void onResponse(Call<ArrayList<UserCart>> call, Response<ArrayList<UserCart>> response) {
+                    ArrayList<UserCart> userCart = response.body();
+                    if (userCart.size() != 0) {
+                        badge.setText(userCart.size() + "+");
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<ArrayList<UserCart>> call, Throwable t) {
+                    Log.d("PRINT", "------------------------Failure------------------------");
+                }
+            });
+        } else {
+            badge.setText("0+");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("PRINT", "----------------------MainActivity OnResume-----------------------");
     }
 }

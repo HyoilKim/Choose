@@ -8,14 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.bumptech.glide.Glide;
 import com.example.choose.R;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends PagerAdapter {
     private Context mContext;
-    private ArrayList<Integer> imageList;
+    private ArrayList<String> imageList;
 
-    public ViewPagerAdapter(Context context, ArrayList<Integer> imageList) {
+    public ViewPagerAdapter(Context context, ArrayList<String> imageList) {
         this.mContext = context;
         this.imageList = imageList;
     }
@@ -27,7 +29,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_detailviewpager, null, false);
 
         ImageView imageView = view.findViewById(R.id.imageView);
-        imageView.setImageResource(imageList.get(position));
+//        imageView.setImageResource(imageList.get(position));
+        Glide.with(mContext).load("http://192.249.19.252:2680" + imageList.get(position)).into(imageView);
 
         container.addView(view);
 

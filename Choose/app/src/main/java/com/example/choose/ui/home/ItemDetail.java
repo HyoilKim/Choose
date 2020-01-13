@@ -16,10 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.choose.MainActivity;
 import com.example.choose.R;
 import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -30,7 +32,7 @@ import retrofit2.Response;
 import static androidx.annotation.Dimension.DP;
 
 public class ItemDetail extends AppCompatActivity {
-    private ArrayList<Integer> imageList;
+    private ArrayList<String> imageList;
     private ImageView imageView;
     private TextView title, desc;
     private ImageButton like, addCart;
@@ -53,9 +55,9 @@ public class ItemDetail extends AppCompatActivity {
     public void initImageData() {
         // ************ DB 에서 상품 이미지 *************** //
         imageList = new ArrayList<>();
-        imageList.add(R.drawable.user);
-        imageList.add(R.drawable.recent);
-        imageList.add(R.drawable.cart);
+        imageList.add(intent.getStringExtra("ViewPager1"));
+        imageList.add(intent.getStringExtra("ViewPager2"));
+        imageList.add(intent.getStringExtra("ViewPager3"));
     }
 
     public void setViewPager() {
@@ -73,11 +75,12 @@ public class ItemDetail extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         ((AppCompatActivity)this).getSupportActionBar().hide();
 
+        intent = getIntent();
+
         initView();
         initImageData();
         setViewPager();
 
-        intent = getIntent();
         itemId = intent.getIntExtra("ItemId", -1);
         Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
         title.setText(intent.getStringExtra("title"));
@@ -126,7 +129,14 @@ public class ItemDetail extends AppCompatActivity {
         RetrofitStatic.getmRetrofitAPI().addItemToCart(email, itemId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("PRINT", "--------------Adding to Cart Success!!-----------------");
+                ResponseBody i = response.body();
+                try {
+                    String num = i.string();
+                    Log.d("PRINT", "--------------Adding to Cart Success!!-----------------");
+                    MainActivity.badge.setText(num + "+");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getApplicationContext(), "장바구니에 추가 되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
@@ -141,7 +151,6 @@ public class ItemDetail extends AppCompatActivity {
         RetrofitStatic.getmRetrofitAPI().addItemToLike(email, itemId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("PRINT", "-------------------Adding to Like Success!!------------------");
                 Toast.makeText(getApplicationContext(), "찜한 목록에 추가 되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
