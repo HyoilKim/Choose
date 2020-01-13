@@ -1,7 +1,6 @@
 package com.example.choose.ui.myPage;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyPage extends Fragment {
     private ImageButton likeItem;
-    private TextView login2;
+    private TextView login2, registerCard;
     private Retrofit mRetrofit;
     private RetrofitAPI mRetrofitAPI;
 
@@ -96,6 +95,14 @@ public class MyPage extends Fragment {
             }
         });
 
+        registerCard = view.findViewById(R.id.addCard);
+        registerCard.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CardList.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

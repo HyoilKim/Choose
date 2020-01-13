@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 .inflate(R.layout.bottom_nav_badge, itemView, true);
         TextView badge = badgeLayout.findViewById(R.id.badge);
         badge.setText("0+");
+
     }
-
-
 }

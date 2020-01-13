@@ -65,7 +65,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:src="@drawable/ic_like" />
+                android:src="@drawable/ic_giving" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,11 +81,12 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:orientation="vertical">
-            <ImageButton
+            <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:src="@drawable/ic_like" />
+                android:src="@drawable/ic_giving"
+                android:scaleType="centerInside"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,8 +109,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal"
                 android:background="#ffffff">
 
@@ -120,24 +120,26 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_loupe" />
+                    android:src="@drawable/ic_card" />
 
-                <Button
-                    android:id="@+id/button"
+                <TextView
+                    android:id="@+id/addCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:gravity="left"
                     android:paddingLeft="5dp"
                     android:paddingTop="15dp"
-                    android:text="배송조회" />
+                    android:paddingBottom="15dp"
+                    android:textColor="#000000"
+                    android:text="카드등록" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -147,23 +149,25 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_loupe" />
+                    android:src="@drawable/ic_edit" />
 
-                <Button
+                <TextView
                     android:id="@+id/button4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
-                    android:gravity="left"
                     android:paddingLeft="5dp"
                     android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="#000000"
+
                     android:text="작성후기" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -173,9 +177,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_loupe" />
+                    android:src="@drawable/ic_coupon" />
 
-                <Button
+                <TextView
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,13 +187,15 @@
                     android:gravity="left"
                     android:paddingLeft="5dp"
                     android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="#000000"
                     android:text="할인 쿠폰" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -199,9 +205,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_loupe" />
+                    android:src="@drawable/ic_gear" />
 
-                <Button
+                <TextView
                     android:id="@+id/button6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -209,6 +215,8 @@
                     android:gravity="left"
                     android:paddingLeft="5dp"
                     android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="#000000"
                     android:text="설정" />
             </LinearLayout>
         </LinearLayout>
