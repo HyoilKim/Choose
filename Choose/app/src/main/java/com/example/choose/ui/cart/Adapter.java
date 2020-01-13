@@ -17,11 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.choose.MainActivity;
 import com.example.choose.R;
 import com.example.choose.RetrofitAPI;
 import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -108,6 +110,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         RetrofitStatic.getmRetrofitAPI().deleteItemToCart(email, itemId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody i = response.body();
+                try {
+                    String num = i.string();
+                    MainActivity.badge.setText(num + "+");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Log.d("PRINT", "------------------Delete Success-----------------");
             }
 

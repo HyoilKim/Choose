@@ -16,10 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.choose.MainActivity;
 import com.example.choose.R;
 import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -53,10 +55,6 @@ public class ItemDetail extends AppCompatActivity {
     public void initImageData() {
         // ************ DB 에서 상품 이미지 *************** //
         imageList = new ArrayList<>();
-//        imageList.add(R.drawable.user);
-//        imageList.add(R.drawable.recent);
-//        imageList.add(R.drawable.cart);
-//        imageList.add("s");
         imageList.add(intent.getStringExtra("ViewPager1"));
         imageList.add(intent.getStringExtra("ViewPager2"));
         imageList.add(intent.getStringExtra("ViewPager3"));
@@ -131,7 +129,14 @@ public class ItemDetail extends AppCompatActivity {
         RetrofitStatic.getmRetrofitAPI().addItemToCart(email, itemId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("PRINT", "--------------Adding to Cart Success!!-----------------");
+                ResponseBody i = response.body();
+                try {
+                    String num = i.string();
+                    Log.d("PRINT", "--------------Adding to Cart Success!!-----------------");
+                    MainActivity.badge.setText(num + "+");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getApplicationContext(), "장바구니에 추가 되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
@@ -146,7 +151,6 @@ public class ItemDetail extends AppCompatActivity {
         RetrofitStatic.getmRetrofitAPI().addItemToLike(email, itemId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("PRINT", "-------------------Adding to Like Success!!------------------");
                 Toast.makeText(getApplicationContext(), "찜한 목록에 추가 되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
