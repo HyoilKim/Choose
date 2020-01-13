@@ -73,7 +73,14 @@ public class RecentLookup extends Fragment {
 
                                     Log.d("Print", "id : " + i.getId() + ", name : " + i.getName() + ", price : " + i.getPrice() + ", image: " + i.getImage());
 
-                                    recentShow.add(new ItemData(i.getId(), i.getName(), i.getCategory(), i.getPrice(), i.getImage(), i.getDescription()));
+                                    ArrayList<String> viewPagerList = new ArrayList<>();
+
+                                    viewPagerList.add(i.getViewPagerImage1());
+                                    viewPagerList.add(i.getViewPagerImage2());
+                                    viewPagerList.add(i.getViewPagerImage3());
+
+                                    recentShow.add(new ItemData(i.getId(), i.getName(), i.getCategory(), i.getPrice(), i.getImage(), i.getViewPagerImage1(),
+                                            i.getViewPagerImage2(), i.getViewPagerImage3(), i.getDescription()));
                                 }
                             } catch(Exception e) {
                                 e.printStackTrace();
@@ -99,6 +106,11 @@ public class RecentLookup extends Fragment {
                                     intent.putExtra("image", recentShow.get(position).getImage());
                                     intent.putExtra("title", recentShow.get(position).getName());
                                     intent.putExtra("desc", recentShow.get(position).getDescription());
+
+                                    intent.putExtra("ViewPager1", recentShow.get(position).getViewPagerImage1());
+                                    intent.putExtra("ViewPager2", recentShow.get(position).getViewPagerImage2());
+                                    intent.putExtra("ViewPager3", recentShow.get(position).getViewPagerImage3());
+
                                     startActivity(intent);
                                 }
                             });

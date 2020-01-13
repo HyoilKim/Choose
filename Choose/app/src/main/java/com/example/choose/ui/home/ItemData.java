@@ -4,6 +4,9 @@ package com.example.choose.ui.home;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ItemData {
 //    public String id;
 //    public String name;
@@ -56,13 +59,32 @@ public class ItemData {
     @Expose
     private String description;
 
-    public ItemData(Integer id, String name, String category, Integer price, String image, String description) {
+    @SerializedName("view_pager_image_1")
+    @Expose
+    private String viewPagerImage1;
+
+    @SerializedName("view_pager_image_2")
+    @Expose
+    private String viewPagerImage2;
+
+    @SerializedName("view_pager_image_3")
+    @Expose
+    private String viewPagerImage3;
+
+    private ArrayList<String> viewPagerList = new ArrayList<>();
+
+    public ItemData(Integer id, String name, String category, Integer price, String image, String viewPagerImage1, String viewPagerImage2
+            , String viewPagerImage3, String description) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
         this.description = description;
+//        this.viewPagerList = viewPagerList;
+        this.viewPagerImage1 = viewPagerImage1;
+        this.viewPagerImage2 = viewPagerImage2;
+        this.viewPagerImage3 = viewPagerImage3;
     }
 
     public Integer getId() {
@@ -111,5 +133,37 @@ public class ItemData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getViewPagerImage1() {
+        return viewPagerImage1;
+    }
+
+    public void setViewPagerImage1(String viewPagerImage1) {
+        this.viewPagerImage1 = viewPagerImage1;
+    }
+
+    public String getViewPagerImage2() {
+        return viewPagerImage2;
+    }
+
+    public void setViewPagerImage2(String viewPagerImage2) {
+        this.viewPagerImage2 = viewPagerImage2;
+    }
+
+    public String getViewPagerImage3() {
+        return viewPagerImage3;
+    }
+
+    public void setViewPagerImage3(String viewPagerImage3) {
+        this.viewPagerImage3 = viewPagerImage3;
+    }
+
+    public ArrayList<String> getViewPagerList() {
+        return viewPagerList;
+    }
+
+    public void setViewPagerList(ArrayList<String> viewPagerList) {
+        this.viewPagerList = viewPagerList;
     }
 }

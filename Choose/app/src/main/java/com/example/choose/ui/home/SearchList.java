@@ -46,8 +46,9 @@ public class SearchList extends AppCompatActivity {
                     // DB에 접근하여 검색어에 해당하는 카테고리or이름을 가진 ItemList로 전환 //
                     Log.d("123","Asdf");
                     Intent intent = new Intent(getApplicationContext(), ItemList.class);
-                    intent.putExtra("name", searchBar.getText().toString());
-                    intent.putExtra("category", searchBar.getText().toString());
+                    intent.putExtra("name", searchBar.getText().toString().trim());
+                    intent.putExtra("flag", "SearchResult");
+//                    intent.putExtra("category", searchBar.getText().toString());
                     startActivity(intent);
                 }
                 return false;

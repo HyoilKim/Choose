@@ -30,7 +30,7 @@ import retrofit2.Response;
 import static androidx.annotation.Dimension.DP;
 
 public class ItemDetail extends AppCompatActivity {
-    private ArrayList<Integer> imageList;
+    private ArrayList<String> imageList;
     private ImageView imageView;
     private TextView title, desc;
     private ImageButton like, addCart;
@@ -53,9 +53,13 @@ public class ItemDetail extends AppCompatActivity {
     public void initImageData() {
         // ************ DB 에서 상품 이미지 *************** //
         imageList = new ArrayList<>();
-        imageList.add(R.drawable.user);
-        imageList.add(R.drawable.recent);
-        imageList.add(R.drawable.cart);
+//        imageList.add(R.drawable.user);
+//        imageList.add(R.drawable.recent);
+//        imageList.add(R.drawable.cart);
+//        imageList.add("s");
+        imageList.add(intent.getStringExtra("ViewPager1"));
+        imageList.add(intent.getStringExtra("ViewPager2"));
+        imageList.add(intent.getStringExtra("ViewPager3"));
     }
 
     public void setViewPager() {
@@ -73,11 +77,12 @@ public class ItemDetail extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         ((AppCompatActivity)this).getSupportActionBar().hide();
 
+        intent = getIntent();
+
         initView();
         initImageData();
         setViewPager();
 
-        intent = getIntent();
         itemId = intent.getIntExtra("ItemId", -1);
         Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
         title.setText(intent.getStringExtra("title"));

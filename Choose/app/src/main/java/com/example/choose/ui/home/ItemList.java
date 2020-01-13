@@ -57,26 +57,53 @@ public class ItemList extends AppCompatActivity {
 
         adapter = new Adapter();
 
-        mRetrofitAPI.getCategoryItem(category).enqueue(new Callback<ArrayList<ItemData>>() {
-            @Override
-            public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
-                ArrayList<ItemData> items = response.body();
+        if (intent.getStringExtra("flag") == null) {
+            mRetrofitAPI.getCategoryItem(category).enqueue(new Callback<ArrayList<ItemData>>() {
+                @Override
+                public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
+                    ArrayList<ItemData> items = response.body();
 
-                if (items.size() != 0) {
-                    for (ItemData elem : items) {
-                        adapter.addItem(elem);
-                        Log.d("Print", "id: " + elem.getId() + " name: " + elem.getName() + " category: " + elem.getCategory() +
-                                " price: " + elem.getPrice() + " image: " + elem.getImage() + " description : " + elem.getDescription());
+                    if (items.size() != 0) {
+                        for (ItemData elem : items) {
+                            adapter.addItem(elem);
+                            Log.d("Print", "id: " + elem.getId() + " name: " + elem.getName() + " category: " + elem.getCategory() +
+                                    " price: " + elem.getPrice() + " image: " + elem.getImage() + " description : " + elem.getDescription() +
+                                    ", ViewPager1: " + elem.getViewPagerImage1() + ", ViewPager2: " + elem.getViewPagerImage2() + ", ViewPager3: " +
+                                    elem.getViewPagerImage3());
+                        }
+                        gridView.setAdapter(adapter);
                     }
-                    gridView.setAdapter(adapter);
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<ItemData>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<ArrayList<ItemData>> call, Throwable t) {
+                    Log.d("PRINT", "---------------------Failure----------------------");
+                }
+            });
+        } else if (intent.getStringExtra("flag").equals("SearchResult")) {
+            RetrofitStatic.getmRetrofitAPI().getSearchItem(intent.getStringExtra("name")).enqueue(new Callback<ArrayList<ItemData>>() {
+                @Override
+                public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
+                    ArrayList<ItemData> items = response.body();
 
-            }
-        });
+                    if (items.size() != 0) {
+                        for (ItemData elem : items) {
+                            adapter.addItem(elem);
+                            Log.d("Print", "id: " + elem.getId() + " name: " + elem.getName() + " category: " + elem.getCategory() +
+                                    " price: " + elem.getPrice() + " image: " + elem.getImage() + " description : " + elem.getDescription() +
+                                    ", ViewPager1: " + elem.getViewPagerImage1() + ", ViewPager2: " + elem.getViewPagerImage2() + ", ViewPager3: " +
+                                    elem.getViewPagerImage3());
+                        }
+                        gridView.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<ItemData>> call, Throwable t) {
+                    Log.d("PRINT", "---------------------Failure----------------------");
+                }
+            });
+        }
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,6 +126,15 @@ public class ItemList extends AppCompatActivity {
                 Log.d("img", adapter.getItem(i).getImage());
                 intent.putExtra("ItemId", adapter.getItem(i).getId());
                 intent.putExtra("image", adapter.getItem(i).getImage());
+
+                Log.d("PRINT", "-------------------------" + adapter.getItem(i).getViewPagerImage1());
+                Log.d("PRINT", "-------------------------" + adapter.getItem(i).getViewPagerImage2());
+                Log.d("PRINT", "-------------------------" + adapter.getItem(i).getViewPagerImage3());
+
+                intent.putExtra("ViewPager1", adapter.getItem(i).getViewPagerImage1());
+                intent.putExtra("ViewPager2", adapter.getItem(i).getViewPagerImage2());
+                intent.putExtra("ViewPager3", adapter.getItem(i).getViewPagerImage3());
+
                 intent.putExtra("title", adapter.getItem(i).getName());
                 intent.putExtra("desc", adapter.getItem(i).getDescription());
                 startActivity(intent);

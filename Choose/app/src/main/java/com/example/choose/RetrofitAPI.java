@@ -50,4 +50,7 @@ public interface RetrofitAPI {
 
     @PUT("/get-recent/{email}/{id}")
     Call<ResponseBody> addRecentView(@Path("email") String email, @Path("id") Integer id);
+
+    @GET("/get-item/search/{keyword}")
+    Call<ArrayList<ItemData>> getSearchItem(@Path("keyword") String keyword);
 }
