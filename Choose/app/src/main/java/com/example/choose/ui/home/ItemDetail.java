@@ -33,7 +33,7 @@ import static androidx.annotation.Dimension.DP;
 
 public class ItemDetail extends AppCompatActivity {
     private ArrayList<String> imageList;
-    private ImageView imageView1, imageView2, imageView3, imageView4;
+    private ImageView imageView1, imageView2, imageView3;
     private TextView title, desc;
     private ImageButton like, addCart;
     private Button buy;
@@ -46,9 +46,8 @@ public class ItemDetail extends AppCompatActivity {
         imageView1 = findViewById(R.id.detail_image1);
         imageView2 = findViewById(R.id.detail_image2);
         imageView3 = findViewById(R.id.detail_image3);
-        imageView4 = findViewById(R.id.detail_image4);
-        title = findViewById(R.id.detail_title);
-        desc = findViewById(R.id.detail_desc);
+//        title = findViewById(R.id.detail_title);
+//        desc = findViewById(R.id.detail_desc);
         like = findViewById(R.id.like);
         addCart = findViewById(R.id.cart);
         buy = findViewById(R.id.buy);
@@ -61,14 +60,21 @@ public class ItemDetail extends AppCompatActivity {
         imageList.add(intent.getStringExtra("ViewPager1"));
         imageList.add(intent.getStringExtra("ViewPager2"));
         imageList.add(intent.getStringExtra("ViewPager3"));
+
+        for (int i = 0; i < 3; i++) {
+            Log.d("PRINT", "~~~~~~~~~~~~~~~~~~~~~" + intent.getStringExtra("DetailView" + i));
+        }
+        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("DetailView1")).into(imageView1);
+        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("DetailView2")).into(imageView2);
+        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("DetailView3")).into(imageView3);
     }
 
     public void setViewPager() {
-        viewPager.setClipToPadding(false);
-        float density = getResources().getDisplayMetrics().density;
-        int margin = (int) (DP * density);
-        viewPager.setPadding(margin, 0, margin, 0);
-        viewPager.setPageMargin(margin/2);
+//        viewPager.setClipToPadding(false);
+//        float density = getResources().getDisplayMetrics().density;
+//        int margin = (int) (DP * density);
+//        viewPager.setPadding(margin, 0, margin, 0);
+//        viewPager.setPageMargin(margin/2);
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
     }
 
@@ -86,8 +92,8 @@ public class ItemDetail extends AppCompatActivity {
 
         itemId = intent.getIntExtra("ItemId", -1);
 //        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
-        title.setText(intent.getStringExtra("title"));
-        desc.setText(intent.getStringExtra("desc"));
+//        title.setText(intent.getStringExtra("title"));
+//        desc.setText(intent.getStringExtra("desc"));
 
         Log.d("Print", "----------------------" + itemId + "-----------------------");
 

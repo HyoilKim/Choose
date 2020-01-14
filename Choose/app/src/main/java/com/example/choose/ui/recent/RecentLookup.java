@@ -84,8 +84,11 @@ public class RecentLookup extends Fragment {
                                     viewPagerList.add(i.getViewPagerImage2());
                                     viewPagerList.add(i.getViewPagerImage3());
 
-                                    recentShow.add(new ItemData(i.getId(), i.getName(), i.getCategory(), i.getPrice(), i.getImage(), i.getViewPagerImage1(),
-                                            i.getViewPagerImage2(), i.getViewPagerImage3(), i.getDescription()));
+//                                    Integer id, String name, String category, Integer price, String image, String description, String viewPagerImage1,
+//                                            String viewPagerImage2, String viewPagerImage3, int age, String detailView1, String detailView2, String detailView3
+
+                                    recentShow.add(new ItemData(i.getId(), i.getName(), i.getCategory(), i.getPrice(), i.getImage(), i.getDescription(),i.getViewPagerImage1(),
+                                            i.getViewPagerImage2(), i.getViewPagerImage3(), i.getAge(), i.getDetailView1(), i.getDetailView2(), i.getDetailView3()));
                                 }
                             } catch(Exception e) {
                                 e.printStackTrace();
@@ -115,6 +118,10 @@ public class RecentLookup extends Fragment {
                                     intent.putExtra("ViewPager1", recentShow.get(position).getViewPagerImage1());
                                     intent.putExtra("ViewPager2", recentShow.get(position).getViewPagerImage2());
                                     intent.putExtra("ViewPager3", recentShow.get(position).getViewPagerImage3());
+
+                                    intent.putExtra("DetailView1", recentShow.get(position).getDetailView1());
+                                    intent.putExtra("DetailView2", recentShow.get(position).getDetailView2());
+                                    intent.putExtra("DetailView3", recentShow.get(position).getDetailView3());
 
                                     startActivity(intent);
                                 }

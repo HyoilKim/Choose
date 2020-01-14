@@ -23,6 +23,7 @@ import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -63,14 +64,16 @@ public class ItemList extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
                     ArrayList<ItemData> items = response.body();
-
+                    if (UserInfo.isIsLogin()) {
+                        Collections.sort(items);
+                    }
                     if (items.size() != 0) {
                         for (ItemData elem : items) {
                             adapter.addItem(elem);
                             Log.d("Print", "id: " + elem.getId() + " name: " + elem.getName() + " category: " + elem.getCategory() +
                                     " price: " + elem.getPrice() + " image: " + elem.getImage() + " description : " + elem.getDescription() +
                                     ", ViewPager1: " + elem.getViewPagerImage1() + ", ViewPager2: " + elem.getViewPagerImage2() + ", ViewPager3: " +
-                                    elem.getViewPagerImage3());
+                                    elem.getViewPagerImage3() + elem.getDetailView1() + ", " + elem.getDetailView2() + ", " + elem.getDetailView3());
                         }
                         gridView.setAdapter(adapter);
                     }
@@ -135,6 +138,12 @@ public class ItemList extends AppCompatActivity {
                 intent.putExtra("ViewPager1", adapter.getItem(i).getViewPagerImage1());
                 intent.putExtra("ViewPager2", adapter.getItem(i).getViewPagerImage2());
                 intent.putExtra("ViewPager3", adapter.getItem(i).getViewPagerImage3());
+
+                intent.putExtra("DetailView1", adapter.getItem(i).getDetailView1());
+                intent.putExtra("DetailView2", adapter.getItem(i).getDetailView2());
+                intent.putExtra("DetailView3", adapter.getItem(i).getDetailView3());
+
+                Log.d("PRINT", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + adapter.getItem(i).getDetailView1());
 
                 intent.putExtra("title", adapter.getItem(i).getName());
                 intent.putExtra("desc", adapter.getItem(i).getDescription());
