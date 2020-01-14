@@ -2,6 +2,10 @@ package com.example.choose.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -89,6 +93,7 @@ public class ItemList extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<ItemData>> call, Response<ArrayList<ItemData>> response) {
                     ArrayList<ItemData> items = response.body();
+                    if (items.size() % 2 == 1) gridView.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.white));
 
                     if (items.size() != 0) {
                         for (ItemData elem : items) {

@@ -4,6 +4,7 @@
     <color name="homeBackground">#F3F1F1</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#F7C023</color>
+    <color name="white">#ffffff</color>
 <!--    <color name="bottomMenuBarItem">#FFA161</color>-->
 <!--    <color name="white">#ffffff</color>-->
 </resources>
