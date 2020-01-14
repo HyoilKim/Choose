@@ -32,15 +32,35 @@ public class CardRegister extends AppCompatActivity {
         String cardNumber = intent.getStringExtra("cardNumber");
         String validPeriod = intent.getStringExtra("validPeriod");
 
-        String tmp1[] = cardNumber.split(" ");
-        cardNumber1.setText(tmp1[0]);
-        cardNumber2.setText(tmp1[1]);
-        cardNumber3.setText(tmp1[2]);
-        cardNumber4.setText(tmp1[3]);
+        Log.d("PRINT RESULT", "++++++++++++" + cardNumber);
+        Log.d("PRINT RESULT", "++++++++++++" + validPeriod);
 
-        String[] tmp2 = validPeriod.split("/");
-        validMM.setText(tmp2[0]);
-        validYY.setText(tmp2[1]);
+        if (cardNumber.equals("")) {
+            cardNumber1.setText("");
+            cardNumber2.setText("");
+            cardNumber3.setText("");
+            cardNumber4.setText("");
+        } else {
+            String tmp1[] = cardNumber.split(" ");
+            cardNumber1.setText(tmp1[0]);
+            cardNumber2.setText(tmp1[1]);
+            cardNumber3.setText(tmp1[2]);
+            cardNumber4.setText(tmp1[3]);
+        }
+//        String tmp1[] = cardNumber.split(" ");
+//        cardNumber1.setText(tmp1[0]);
+//        cardNumber2.setText(tmp1[1]);
+//        cardNumber3.setText(tmp1[2]);
+//        cardNumber4.setText(tmp1[3]);
+
+        if (validPeriod.equals("")) {
+            validMM.setText("");
+            validYY.setText("");
+        } else {
+            String[] tmp2 = validPeriod.split("/");
+            validMM.setText(tmp2[0]);
+            validYY.setText(tmp2[1]);
+        }
 
         cvc.setOnKeyListener(new View.OnKeyListener() {
             @Override

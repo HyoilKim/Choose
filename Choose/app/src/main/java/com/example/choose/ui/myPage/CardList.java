@@ -5,14 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +28,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CardList extends AppCompatActivity {
-    public static final int SUCCES_REGISTER = 10;
+    public static final int SUCCESS_REGISTER = 10;
     Button mButton;
     ListView listView;
     String cardNumber;
@@ -80,12 +78,24 @@ public class CardList extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (resultCode == SUCCES_REGISTER) {
+        } else if (resultCode == SUCCESS_REGISTER) {
 //            String name = intent.getStringExtra("name").toString();
             String name = data.getStringExtra("cardName");
             cardList.add(name);
             adapter.notifyDataSetChanged();
             Log.d("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ",name+"");
+        }
+    }
+
+    private boolean isDouble(String s) {
+        try {
+//            Long.parseLong(s);
+            Double.parseDouble(s);
+            Log.d("PRINT", "------------" + Double.parseDouble(s));
+            return true;
+        } catch (Exception e) {
+            Log.d("PRINT", "------------" + e + "---------------");
+            return false;
         }
     }
 
@@ -100,12 +110,34 @@ public class CardList extends AppCompatActivity {
                     // Task completed successfully
                     // [START_EXCLUDE]
                     // [START get_text]
+                    boolean validPeriodisSet = false;
+                    boolean cardNumberisSet = false;
+
                     for (FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks()) {
                         Rect boundingBox = block.getBoundingBox();
                         Point[] cornerPoints = block.getCornerPoints();
                         String text = block.getText();
-                        if (text.contains("/")) validPeriod = text;
-                        if (text.length() >= 19) cardNumber = text;
+                        Log.d("PRINT", "-------------------" + text + ", " + text.length());
+                        if (text.contains("/")) {
+                            Log.d("PRINT", "validText in Text");
+                            int slashContain = text.indexOf("/");
+                            String month = text.substring(slashContain - 2, slashContain);
+                            String year = text.substring(slashContain + 1, slashContain + 3);
+                            validPeriod = month + "/" + year;
+                            validPeriodisSet = true;
+                        } else if (!validPeriodisSet){
+                            validPeriod = "";
+                        }
+
+                        if (text.length() >= 19 && isDouble(text.replaceAll("\\p{Z}", "").replaceAll(System.getProperty("line.separator"), ""))) {
+                            Log.d("PRINT", "cardNumber in TEXT");
+                            cardNumber = text.substring(0, 4) + " " + text.substring(5, 9) + " "
+                                    + text.substring(10, 14) + " " + text.substring(15, 19);
+                            cardNumberisSet = true;
+                        } else if (!cardNumberisSet){
+                            cardNumber = "";
+                        }
+
                         parsingText += text+"\n";
                     }
                     Log.d("@@", cardNumber);
@@ -114,7 +146,7 @@ public class CardList extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CardRegister.class);
                     intent.putExtra("cardNumber", cardNumber);
                     intent.putExtra("validPeriod", validPeriod);
-                    startActivityForResult(intent, SUCCES_REGISTER);
+                    startActivityForResult(intent, SUCCESS_REGISTER);
                 }
             })
             .addOnFailureListener(
