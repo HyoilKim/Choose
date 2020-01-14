@@ -53,4 +53,8 @@ public interface RetrofitAPI {
 
     @GET("/get-item/search/{keyword}")
     Call<ArrayList<ItemData>> getSearchItem(@Path("keyword") String keyword);
+
+    @PUT("/get-card/{email}/{cardNum}/{cardName}/{validateNum}/{cvc}")
+    Call<ResponseBody> addCardInfo (@Path("email") String email, @Path("cardNum") String cardNum,
+                                    @Path("cardName") String cardName, @Path("validateNum") String validateNum, @Path("cvc") String cvc);
 }
