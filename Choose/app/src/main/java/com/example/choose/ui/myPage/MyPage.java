@@ -99,8 +99,12 @@ public class MyPage extends Fragment {
         registerCard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CardList.class);
-                startActivity(intent);
+                if (UserInfo.isIsLogin()) {
+                    Intent intent = new Intent(getActivity(), CardList.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;

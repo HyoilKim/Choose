@@ -15,6 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choose.R;
+import com.example.choose.RetrofitStatic;
+import com.example.choose.UserInfo;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CardRegister extends AppCompatActivity {
     public static final int SUCCES_REGISTER = 10;
@@ -70,9 +77,18 @@ public class CardRegister extends AppCompatActivity {
                     return true;
                 } else if (event.getAction() == KeyEvent.ACTION_UP) {
                     String name = cardName.getText().toString();
+                    String cardNum = cardNumber1.getText().toString() + cardNumber2.getText().toString() +
+                            cardNumber3.getText().toString() + cardNumber4.getText().toString();
+                    String validateNum = validMM.getText().toString() + validYY.getText().toString();
+                    String cvcNum = cvc.getText().toString();
+
                     Log.d("register name", name);
+
                     Intent intent = new Intent();
 //                    intent1.putExtra("cardName", name);
+
+                    addCard(UserInfo.getEmail(), cardNum, name, validateNum, cvcNum);
+
                     intent.putExtra("cardName", name);
                     setResult(SUCCES_REGISTER, intent);
                     finish();
@@ -85,6 +101,22 @@ public class CardRegister extends AppCompatActivity {
                 return false;
             }
          });
+    }
+
+    private void addCard(String email, String cardNum, String cardName, String validateNum, String cvc) {
+        RetrofitStatic.getmRetrofitAPI().addCardInfo(email, cardNum, cardName, validateNum, cvc).enqueue(
+                new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("PRINT", "---------------Adding Card Info Success----------------");
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("PRINT", "---------------Adding Card Info Fail--------------");
+                    }
+                }
+        );
     }
 
     public void initView() {
