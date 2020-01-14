@@ -44,7 +44,6 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/sum"
                 android:gravity="center_vertical"
-
                 android:text="원"
                 android:textColor="#000000" />
         </LinearLayout>
@@ -52,8 +51,11 @@
             android:id="@+id/buy"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#ffffff"
             android:layout_toRightOf="@+id/priceSum"
-            android:text="구매하기" />
+            android:text="구매하기"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:background="@color/colorPrimary"/>
     </LinearLayout>
 </RelativeLayout>

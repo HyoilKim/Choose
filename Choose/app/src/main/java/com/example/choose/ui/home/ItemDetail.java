@@ -33,7 +33,7 @@ import static androidx.annotation.Dimension.DP;
 
 public class ItemDetail extends AppCompatActivity {
     private ArrayList<String> imageList;
-    private ImageView imageView;
+    private ImageView imageView1, imageView2, imageView3, imageView4;
     private TextView title, desc;
     private ImageButton like, addCart;
     private Button buy;
@@ -43,7 +43,10 @@ public class ItemDetail extends AppCompatActivity {
     private int itemId;
 
     public void initView() {
-        imageView = findViewById(R.id.detail_image);
+        imageView1 = findViewById(R.id.detail_image1);
+        imageView2 = findViewById(R.id.detail_image2);
+        imageView3 = findViewById(R.id.detail_image3);
+        imageView4 = findViewById(R.id.detail_image4);
         title = findViewById(R.id.detail_title);
         desc = findViewById(R.id.detail_desc);
         like = findViewById(R.id.like);

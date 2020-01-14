@@ -8,10 +8,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,9 +51,11 @@ public class Cart extends Fragment {
         getActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
     }
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
         sumOfPrice = root.findViewById(R.id.priceSum);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://192.249.19.252:2680")
@@ -122,10 +127,12 @@ public class Cart extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
+                ((AppCompatActivity) getActivity()).getSupportActionBar().show();
                 getFragmentManager().popBackStack();
                 return false;
             }
         });
         return root;
     }
+
 }
