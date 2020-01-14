@@ -19,10 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.choose.MainActivity;
 import com.example.choose.R;
 import com.example.choose.RetrofitAPI;
+import com.example.choose.RetrofitStatic;
 import com.example.choose.UserInfo;
+import com.example.choose.ui.cart.UserCart;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,65 +62,68 @@ public class MyPage extends Fragment {
         login2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View popupView = getLayoutInflater().inflate(R.layout.login_popup, null);
-                PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                popupWindow.setFocusable(true);
-                popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                if (!UserInfo.isIsLogin()) {
+                    View popupView = getLayoutInflater().inflate(R.layout.login_popup, null);
+                    PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    popupWindow.setFocusable(true);
+                    popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-                final EditText idText = (EditText) popupView.findViewById(R.id.id);
-                final EditText passwordText = (EditText) popupView.findViewById(R.id.password);
-                final EditText birthday = (EditText) popupView.findViewById(R.id.birthday);
-                birthday.setVisibility(View.GONE);
+                    final EditText idText = (EditText) popupView.findViewById(R.id.id);
+                    final EditText passwordText = (EditText) popupView.findViewById(R.id.password);
+                    final EditText birthday = (EditText) popupView.findViewById(R.id.birthday);
+                    birthday.setVisibility(View.GONE);
 
-                Button signIn = (Button) popupView.findViewById(R.id.signIn);
-                Button signUp = (Button) popupView.findViewById(R.id.signUp);
-                // 회원가입 하는 경우
-                signUp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Button ok = signIn;
-                        Button cancel = signUp;
-                        ok.setText("Ok");
-                        cancel.setText("Cancel");
-                        birthday.setVisibility(View.VISIBLE);
+                    Button signIn = (Button) popupView.findViewById(R.id.signIn);
+                    Button signUp = (Button) popupView.findViewById(R.id.signUp);
+                    // 회원가입 하는 경우
+                    signUp.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Button ok = signIn;
+                            Button cancel = signUp;
+                            ok.setText("Ok");
+                            cancel.setText("Cancel");
+                            birthday.setVisibility(View.VISIBLE);
 
-                        ok.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // *********** DB에 회원정보 추가 ************* //
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    // *********** DB에 회원정보 추가 ************* //
+                                    enroll(idText.getText().toString(), passwordText.getText().toString(), birthday.getText().toString());
+                                    // ***********     로그인 화면    ************* //
+                                    ok.setText("Sign In");
+                                    cancel.setText("Sign Up");
+                                    birthday.setVisibility(View.GONE);
+                                    // ***********     로그인 시도     ************ //
+                                    ok.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
+                                            popupWindow.dismiss();
+                                        }
+                                    });
+                                }
+                            });
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popupWindow.dismiss();
+                                }
+                            });
+                        }
+                    });
 
-                                // ***********     로그인 화면    ************* //
-                                ok.setText("Sign In");
-                                cancel.setText("Sign Up");
-                                birthday.setVisibility(View.GONE);
-                                // ***********     로그인 시도     ************ //
-                                ok.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        popupWindow.dismiss();
-                                    }
-                                });
-                            }
-                        });
-                        cancel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                popupWindow.dismiss();
-                            }
-                        });
-                    }
-                });
 
-
-                signIn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // ************* DB정보와 일치 유무 ***************//
-                        Log.d("try", "sign in");
-                        login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
-                        popupWindow.dismiss();
-                    }
-                });
+                    signIn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // ************* DB정보와 일치 유무 ***************//
+                            Log.d("try", "sign in");
+                            login(idText.getText().toString().trim(), passwordText.getText().toString().trim());
+                            popupWindow.dismiss();
+                        }
+                    });
+                }
             }
         });
 
@@ -141,9 +151,34 @@ public class MyPage extends Fragment {
         return view;
     }
 
+    private void enroll(String email, String password, String birthday) {
+        RetrofitStatic.getmRetrofitAPI().addUserInfo(email, password, birthday).enqueue(
+                new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        ResponseBody i = response.body();
+                        try {
+                            String success = i.string();
+                            Log.d("PRINT", "---------------------" + success.equals("\"Fail\""));
+                            if (success.equals("\"Fail\"")) {
+                                Log.d("PRINT", "~~~~~~~~~~~~~~~-" + success);
+                                Toast.makeText(getContext(), "이미 존재하는 계정 입니다.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("PRINT", "--------------------User Enroll Failure---------------------");
+                    }
+                }
+        );
+    }
 
-    public void login(String email, String password) {
+    private void login(String email, String password) {
         mRetrofitAPI.getUserData(email).enqueue(new Callback<UserData>() {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
@@ -156,6 +191,23 @@ public class MyPage extends Fragment {
                     UserInfo.setEmail(user.getEmail());
                     UserInfo.setPassword(user.getPassword());
                     UserInfo.setIsLogin(true);
+
+                    RetrofitStatic.getmRetrofitAPI().getUserCart(UserInfo.getEmail()).enqueue(new Callback<ArrayList<UserCart>>() {
+                        @Override
+                        public void onResponse(Call<ArrayList<UserCart>> call, Response<ArrayList<UserCart>> response) {
+                            ArrayList<UserCart> cart = response.body();
+
+                            if (cart.size() != 0) {
+                                MainActivity.badge.setText(cart.size() + "+");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ArrayList<UserCart>> call, Throwable t) {
+
+                        }
+                    });
+
                     login2.setText(UserInfo.getEmail() + " 님 안녕하세요.");
                 } else {
                     Toast.makeText(getContext(), "회원정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
