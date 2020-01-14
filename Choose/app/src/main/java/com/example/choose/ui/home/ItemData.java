@@ -73,6 +73,7 @@ public class ItemData implements Comparable<ItemData> {
 
     @SerializedName("age")
     @Expose
+<<<<<<< HEAD
     private int age;
 
     @SerializedName("detail_view1")
@@ -86,6 +87,9 @@ public class ItemData implements Comparable<ItemData> {
     @SerializedName("detail_view3")
     @Expose
     private String detailView3;
+=======
+    private Integer age;
+>>>>>>> Sort_By_Age
 
     private ArrayList<String> viewPagerList = new ArrayList<>();
 
@@ -173,7 +177,7 @@ public class ItemData implements Comparable<ItemData> {
     public void setViewPagerList(ArrayList<String> viewPagerList) {
         this.viewPagerList = viewPagerList;
     }
-
+    
     public String getDetailView1() { return detailView1; }
     public String getDetailView2() { return detailView2; }
     public String getDetailView3() { return detailView3; }
