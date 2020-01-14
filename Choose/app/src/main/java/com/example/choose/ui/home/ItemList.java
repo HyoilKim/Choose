@@ -41,8 +41,6 @@ public class ItemList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        View view = getLayoutInflater().inflate(R.layout.activity_main, null, false);
-//        view.findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
         setContentView(R.layout.activity_giftlist);
         ((AppCompatActivity)this).getSupportActionBar().setTitle("");
         gridView = (GridView) findViewById(R.id.giftList);

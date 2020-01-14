@@ -71,6 +71,10 @@ public class ItemData {
     @Expose
     private String viewPagerImage3;
 
+    @SerializedName("age")
+    @Expose
+    private Integer age;
+
     private ArrayList<String> viewPagerList = new ArrayList<>();
 
     public ItemData(Integer id, String name, String category, Integer price, String image, String viewPagerImage1, String viewPagerImage2
@@ -165,5 +169,13 @@ public class ItemData {
 
     public void setViewPagerList(ArrayList<String> viewPagerList) {
         this.viewPagerList = viewPagerList;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

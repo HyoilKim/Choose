@@ -60,4 +60,7 @@ public interface RetrofitAPI {
 
     @PUT("/enroll-user/{email}/{password}/{birthday}")
     Call<ResponseBody> addUserInfo (@Path("email") String email, @Path("password") String password, @Path("birthday") String birthday);
+
+    @GET("/get-item/sort/{email}/{category}")
+    Call<ArrayList<ItemData>> getSortedItem(@Path("email") String email, @Path("category") String category);
 }
