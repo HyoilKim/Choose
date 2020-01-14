@@ -14,10 +14,15 @@ class User(models.Model):
 
 
 class Item(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=30)
     category = models.CharField(choices=CATEGORY, max_length=15)
     price = models.IntegerField()
-    image = models.ImageField()
+    view_pager_image_1 = models.ImageField(default="penguin.jpg")
+    view_pager_image_2 = models.ImageField(default="penguin.jpg")
+    view_pager_image_3 = models.ImageField(default="penguin.jpg")
+    image = models.ImageField(default="penguin.jpg")
+    age = models.IntegerField(default=10)
+    description = models.TextField(default="")
 
     def __str__(self):
         return '%s -%s-' % (self.name, self.category)
@@ -36,3 +41,14 @@ class Like(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.user, self.item)
+
+class RecentLookUp(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+class UserCard(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    card_num = models.CharField(max_length=19)
+    card_name = models.TextField()
+    card_validate_num = models.CharField(max_length=5)
+    card_cvc = models.CharField(max_length=3)
