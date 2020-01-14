@@ -8,6 +8,7 @@
         android:id="@+id/recent_lookup_image"
         android:layout_width="208dp"
         android:layout_height="225dp"
-        android:background="#C9C9C9" />
+        android:scaleType="fitXY"
+        android:background="#ffffff" />
 
 </LinearLayout>

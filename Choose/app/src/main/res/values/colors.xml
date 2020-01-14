@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFA71F</color>
+    <color name="colorPrimary">#F7C023</color>
     <color name="homeBackground">#F3F1F1</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#FFA71F</color>
+    <color name="colorAccent">#F7C023</color>
+<!--    <color name="bottomMenuBarItem">#FFA161</color>-->
+<!--    <color name="white">#ffffff</color>-->
 </resources>
