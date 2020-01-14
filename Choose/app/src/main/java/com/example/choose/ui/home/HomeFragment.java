@@ -42,10 +42,9 @@ public class HomeFragment extends Fragment {
         setButtonListener();
 
         ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
-        data.add("https://i.ibb.co/qFmLRYC/m.png");
-        data.add("https://i.ibb.co/ZgXgkgB/w1.png");
-        data.add("https://i.ibb.co/nRX9xN9/w3.png");
-        data.add("https://i.ibb.co/DMvDwTJ/w4.png");
+        data.add("https://i.ibb.co/d42xcJq/ad1.jpg");
+        data.add("https://i.ibb.co/RgfGRB4/ad2.jpg");
+        data.add("https://i.ibb.co/P60hhJs/ad3.jpg");
 
         autoViewPager = (AutoScrollViewPager)root.findViewById(R.id.autoViewPager);
         AutoScrollAdapter scrollAdapter = new AutoScrollAdapter(getContext(), data);

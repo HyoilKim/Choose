@@ -82,7 +82,7 @@ public class ItemDetail extends AppCompatActivity {
         setViewPager();
 
         itemId = intent.getIntExtra("ItemId", -1);
-        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
+//        Glide.with(this).load("http://192.249.19.252:2680" + intent.getStringExtra("image")).into(imageView);
         title.setText(intent.getStringExtra("title"));
         desc.setText(intent.getStringExtra("desc"));
 

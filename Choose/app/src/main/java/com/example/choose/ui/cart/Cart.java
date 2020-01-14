@@ -88,7 +88,7 @@ public class Cart extends Fragment {
 
                                     Log.d("Print", "id : " + i.getId() + ", userId : " + i.getName() + ", item : " + i.getPrice());
 
-                                    itemList.add(new CartItemData(i.getName(), String.valueOf(i.getPrice()), i.getImage(), i.getId(), item.getCount(), false));
+                                    itemList.add(new CartItemData(i.getName(), i.getDescription(), String.valueOf(i.getPrice()), i.getImage(), i.getId(), item.getCount(), false));
                                     eachItemPrice.add(i.getPrice());
                                     eachItemCount.add(item.getCount());
                                 }

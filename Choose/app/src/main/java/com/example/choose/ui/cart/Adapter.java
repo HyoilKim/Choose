@@ -76,11 +76,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String title = item.getTitle();
         String price = item.getPrice();
         String image = item.getImage();
+        String desc = item.getDesc();
         int count = item.getCount();
         boolean isCheck = item.isCheck();
 
         holder.title.setText(title);
         holder.price.setText(price);
+        holder.desc.setText(desc);
         holder.spinner.setAdapter(arrayAdapter);
         holder.spinner.setSelected(false);
         holder.spinner.setSelection(count - 1, false);
@@ -128,7 +130,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView title, price;
+        TextView title, price, desc;
         ImageView image;
         Spinner spinner;
         Button delete;
@@ -136,6 +138,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.cart_title);
+            desc = (TextView) itemView.findViewById(R.id.desc);
             price = (TextView) itemView.findViewById(R.id.cart_price);
             image = (ImageView) itemView.findViewById(R.id.cart_image);
             delete = (Button) itemView.findViewById(R.id.cart_deleteButton);
