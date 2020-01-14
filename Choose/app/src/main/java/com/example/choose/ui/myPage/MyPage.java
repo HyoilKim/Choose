@@ -55,26 +55,57 @@ public class MyPage extends Fragment {
         login2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View popupVIew = getLayoutInflater().inflate(R.layout.login_popup, null);
-                final PopupWindow popupWindow = new PopupWindow(popupVIew, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                View popupView = getLayoutInflater().inflate(R.layout.login_popup, null);
+                PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 popupWindow.setFocusable(true);
-                popupWindow.showAtLocation(popupVIew, Gravity.CENTER, 0, 0);
+                popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-                final EditText idText = (EditText) popupVIew.findViewById(R.id.id);
-                final EditText passwordText = (EditText) popupVIew.findViewById(R.id.password);
+                final EditText idText = (EditText) popupView.findViewById(R.id.id);
+                final EditText passwordText = (EditText) popupView.findViewById(R.id.password);
+                final EditText birthday = (EditText) popupView.findViewById(R.id.birthday);
+                birthday.setVisibility(View.GONE);
 
-                Button ok = (Button) popupVIew.findViewById(R.id.Ok);
-                ok.setText("SIGN IN");
-                Button cancel = (Button) popupVIew.findViewById(R.id.Cancel);
-                cancel.setOnClickListener(new View.OnClickListener() {
+                Button signIn = (Button) popupView.findViewById(R.id.signIn);
+                Button signUp = (Button) popupView.findViewById(R.id.signUp);
+                // 회원가입 하는 경우
+                signUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        popupWindow.dismiss();
-//                        background.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button ok = signIn;
+                        Button cancel = signUp;
+                        ok.setText("Ok");
+                        cancel.setText("Cancel");
+                        birthday.setVisibility(View.VISIBLE);
+
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // *********** DB에 회원정보 추가 ************* //
+
+                                // ***********     로그인 화면    ************* //
+                                ok.setText("Sign In");
+                                cancel.setText("Sign Up");
+                                birthday.setVisibility(View.GONE);
+                                // ***********     로그인 시도     ************ //
+                                ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        popupWindow.dismiss();
+                                    }
+                                });
+                            }
+                        });
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
                     }
                 });
 
-                ok.setOnClickListener(new View.OnClickListener() {
+
+                signIn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // ************* DB정보와 일치 유무 ***************//

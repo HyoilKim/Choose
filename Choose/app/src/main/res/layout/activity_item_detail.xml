@@ -59,23 +59,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/homeBackground"
         android:layout_alignParentBottom="true">
         <ImageButton
             android:id="@+id/like"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_like"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            android:padding="12dp"
+            android:background="#ffffff"
+            android:layout_marginRight="1dp"/>
         <ImageButton
             android:id="@+id/cart"
             android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_add_shopping_cart_black_24dp"/>
+            android:src="@drawable/ic_add_shopping_cart_black_24dp"
+            android:background="#ffffff"
+            android:layout_marginRight="1dp" />
         <Button
             android:id="@+id/buy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="구매하기"/>
+            android:text="구매하기"
+            android:textSize="15dp"
+            android:background="#ffffff"/>
         <!-- 좋아요, 장바구니 ,구매하기 버튼-->
     </LinearLayout>
 </RelativeLayout>
