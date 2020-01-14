@@ -44,9 +44,8 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
-                android:hint="YYYYMMDD"
-                android:maxLength="8"
-                android:inputType="number" />
+                android:hint="birthday:YYYY-MM-DD"
+                android:inputType="date" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

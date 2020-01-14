@@ -57,4 +57,7 @@ public interface RetrofitAPI {
     @PUT("/get-card/{email}/{cardNum}/{cardName}/{validateNum}/{cvc}")
     Call<ResponseBody> addCardInfo (@Path("email") String email, @Path("cardNum") String cardNum,
                                     @Path("cardName") String cardName, @Path("validateNum") String validateNum, @Path("cvc") String cvc);
+
+    @PUT("/enroll-user/{email}/{password}/{birthday}")
+    Call<ResponseBody> addUserInfo (@Path("email") String email, @Path("password") String password, @Path("birthday") String birthday);
 }

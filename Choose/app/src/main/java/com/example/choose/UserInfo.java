@@ -2,9 +2,9 @@ package com.example.choose;
 
 public class UserInfo {
     private static int id;
-    private static String email = "ag502@naver.com";
+    private static String email;
     private static String password;
-    private static boolean isLogin = true;
+    private static boolean isLogin = false;
 
     public static int getId() {
         return id;
