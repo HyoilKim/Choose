@@ -41,6 +41,7 @@ public class CardList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("결제 카드");
         setContentView(R.layout.activity_cardlist);
         mButton = findViewById(R.id.my_button);
         listView = findViewById(R.id.listView);
