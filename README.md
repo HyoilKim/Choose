@@ -3,6 +3,7 @@
 * 설명: 선물을 하려고 포털 사이트에 검색을 하면 자사의 상품을 홍보하는 방식 때문에 적절한 선물을 찾기 어려움. </br>
         사용의 불편함을 느끼고 개발한 선물 추천 어플리케이션
 * 개발 기간: 2020.01.09 ~ 2020.01.14(6일)
+* 개발자: 김효일, 이재윤
 
 ## 기술스택
 * FrontEnd: Android Studio
@@ -15,6 +16,9 @@
 
 ### 홈
 <img src="https://user-images.githubusercontent.com/23691938/72405006-b175cc80-379a-11ea-9f54-05fb14159607.PNG" width="300" height="500">
+
+### 상품 목록
+<img src="https://user-images.githubusercontent.com/23691938/72405007-b175cc80-379a-11ea-9021-a1bfff905744.PNG" width="300" height="500">
 
 ### 상품 상세 화면
 <img src="https://user-images.githubusercontent.com/23691938/72405008-b175cc80-379a-11ea-8f70-6121a95b8dcf.PNG" width="300" height="500">
